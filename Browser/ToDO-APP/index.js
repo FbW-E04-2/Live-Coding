@@ -10,12 +10,12 @@ function addtask(){
         span.innerText= "X" //<span>X</span>
         li.innerText= input.value //<li> task 2 </li>
         li.append(span)//<li> task 2  <span>X</span> </li>
-        
+
         //parentNode.insertBefore( newElement, targetElement)
 
         ul.insertBefore(li, ul.firstElementChild)
         input.value=""
-}
+} //Event Handler
 
-button.addEventListener("click",addtask )
+button.addEventListener("click", addtask )
 
