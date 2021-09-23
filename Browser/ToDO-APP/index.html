@@ -5,15 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo App</title>
+    <style>
+        h1{
+            background-color: yellow;
+            color:white;
+            text-align: center;
+        }
+        div{
+            text-align: center;
+        }
+        li{
+            display: flex;
+            justify-content: space-between;
+            border: 2px solid black;
+            padding: 5px;
+            margin: 20px;
+        }
+        span{
+            display: block;
+            padding: 2px;
+            color: white;
+            background-color: red;
+        }
+
+    </style>
 </head>
 <body>
     <h1>TODO APP</h1>
     <div>
+        <form> 
         <input type="text"> 
         <button>Add Task</button>
+        </form>
     </div>
     <ul>
-        <li> task 1  <span>X</span></li>
+
     </ul>
     <script src="index.js"></script>
 </body>
