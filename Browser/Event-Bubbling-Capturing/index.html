@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Bubbling and Capturing</title>
+<style>
+    .box1{
+        width: 300px;
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: red;
+    }
+    .box2{
+        width: 200px;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: green;
+    }
+    .box3{
+        width: 100px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: yellow;
+    }
+</style>
+</head>
+<body>
+    
+<div class="box1">
+    Box 1
+    <div class="box2">
+        Box 2
+        <div class="box3">Box 3</div>
+    </div>
+</div>
+<script src="index.js"></script>
+</body>
+</html>
