@@ -22,27 +22,28 @@ function addtask(e){
         let li = document.createElement("li")
         let span= document.createElement("span")
         span.innerText= "X" //<span>X</span>
-        span.addEventListener("click", ()=>{
-            console.log("clicked on span")
-            ul.removeChild(span.parentElement)
-        })
-
-        //attaching event listener to my li
-        li.addEventListener("click", ()=>{
-            console.log("clicked on li")
-            li.style.backgroundColor="green"
-        })
         li.innerText= input.value //<li> task 2 </li>
         li.append(span)//<li> task 2  <span>X</span> </li>
-
         //parentNode.insertBefore( newElement, targetElement)
-
         ul.insertBefore(li, ul.firstElementChild)
        /*  input.value="" */
         form.reset()
     }
        
 } //Event Handler
+
+
+//Event Delegation
+ul.addEventListener("click",(e)=>{
+    if(e.target.tagName==="LI"){
+        e.target.style.backgroundColor="green"
+    }else if(e.target.tagName==="SPAN"){
+       /*  ul.removeChild(e.target.parentElement) */
+       e.target.parentElement.remove()
+    }
+})
+
+
 
 form.addEventListener("submit", addtask ) // work for click and enter as well
 
