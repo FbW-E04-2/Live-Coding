@@ -71,3 +71,31 @@ let skills=[]
 for (let item of array) {
   console.log(item[1]);
 } */
+
+
+
+
+
+/* items of an array  for( of)
+keys in object   for(in) */
+let student={
+    name:"Tim",
+    age:23,
+    email:"tim@gmail.com"
+}
+/* console.log(student.name)
+console.log(student.age) */
+
+for(let key in student){
+    console.log(key)
+    console.log(student[key])
+}
+
+console.log(Object.keys(student)) //returns an array
+console.log(Object.values(student) )//returns an array 
+console.log(Object.entries(student)) //returns an array 
+
+
+for(let [key,value] of Object.entries(student) ){
+    console.log(key ,value)
+}
