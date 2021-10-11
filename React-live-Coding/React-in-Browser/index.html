@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script> <!-- react -->
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script> <!-- React-dom -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- <script src="lodash.js"></script> -->
+  <title>React in browser</title>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+            /* console.log(React)
+            console.log(ReactDOM) */
+
+            /* let h1 = React.createElement("h1", null , "Hello World" )
+            let img = React.createElement("img", {src:"https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg", alt:"image", width:200, height:200} )
+            let div= React.createElement("div",null, h1,img) */
+            
+            //JSX
+           /*  let div1 = <div> 
+                <h1>Hello world</h1> 
+                <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" width="200" height="200" />
+                </div> 
+            
+            let div2 = <div> 
+                <h1>Hello world</h1> 
+                <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" width="200" height="200" />
+                </div>  */
+
+
+                //functional component
+                //reusable
+               function GreetUser(obj){
+                    return (
+                        <div>
+                                <h1> Hi, {obj.user}</h1>
+                                <h2> my age is {obj.age}</h2>
+                                <img src={obj.src} alt="" width="200" height="200"/>
+                        </div>
+                    )
+                }
+                
+                function Main(){
+                    //parent component
+                        return (
+                            <div>
+                               {/* child component */}
+                                <GreetUser user="Naqvi" age="32" src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"/>
+                                <GreetUser user="John" age="22" src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"/>
+                                <GreetUser user="Robert" age="25" src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"/>
+                                </div>
+                        )
+                }
+
+               
+            //virtual DOM
+            /* GreetUser("Naqvi") */
+            ReactDOM.render( <Main/>, document.getElementById("root"))
+
+
+    </script>
+</body>
+</html>

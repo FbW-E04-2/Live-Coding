@@ -70,9 +70,9 @@ console.log(print()) //1
 console.log("end")  */
 
 
-
 async function fetchData (){
     try{
+     
         let response = await fetch("https://jsonplaceholder.typicode.com/users")
         let result = await response.json()
    
@@ -82,6 +82,7 @@ async function fetchData (){
         document.body.append(h1)
     })
     console.log(result)
+
       }
     catch(err){
         console.log(err)
