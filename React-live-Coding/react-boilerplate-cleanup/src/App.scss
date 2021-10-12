@@ -1,0 +1,10 @@
+.main{
+    text-align: center;
+    background-color: yellow;
+}
+.header{
+    border: 2px solid black;
+    &:hover{
+        background: red;
+    }
+}
