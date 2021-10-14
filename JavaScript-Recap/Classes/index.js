@@ -102,19 +102,17 @@ student.summary()
 
 
 
-class App extends React.Component{
+/* class App extends React.Component{
     constructor(props){
         super(props)
         this.state={
         tasks:["task 1","task 2","task 3"]
     }
     }
- 
-    
-
+//this.setState({tasks:[...this.state.tasks,"do something"]})
     render(){
         return(
             <h1>Hello World</h1>
         )
     }
-}
+} */
