@@ -7,7 +7,7 @@ export default function ToDonesContainer(props) {
             <h3>BACKLOG</h3>
             {props.todones.map(todone=>{
                 return(
-                       <ToDoneItem key={todone.id} todone={todone}/>
+                       <ToDoneItem key={todone.id} todone={todone} updateTask={props.updateTask} deleteTask={props.deleteTask} />
                 )
             })}
         </div>

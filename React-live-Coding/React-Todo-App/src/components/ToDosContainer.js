@@ -22,6 +22,8 @@ export default class ToDosContainer extends React.Component {
         }
        
     }
+    
+
 
     render(){
         return (
@@ -37,7 +39,7 @@ export default class ToDosContainer extends React.Component {
                 <h3>To Do</h3>
                    {this.props.todos.map(todo=>{
                        return(
-                         <ToDoItem key={todo.id} todo={todo}/>
+                         <ToDoItem key={todo.id} todo={todo} updateTask={this.props.updateTask}/>
                        )
                    })} 
             </div>   
