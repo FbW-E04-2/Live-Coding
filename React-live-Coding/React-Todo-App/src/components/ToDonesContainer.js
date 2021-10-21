@@ -1,17 +1,13 @@
 import React from 'react'
 import ToDoneItem from './ToDoneItem'
-export default function ToDonesContainer() {
-    let todones=[
-        {text:"Live coding" ,done:true},
-        {text:"Watch movie" ,done:true},
-        {text:"Take bath" ,done:true}
-    ]
+export default function ToDonesContainer(props) {
+   
     return (
         <div className="todones-container">
             <h3>BACKLOG</h3>
-            {todones.map(todone=>{
+            {props.todones.map(todone=>{
                 return(
-                       <ToDoneItem todone={todone}/>
+                       <ToDoneItem key={todone.id} todone={todone}/>
                 )
             })}
         </div>
