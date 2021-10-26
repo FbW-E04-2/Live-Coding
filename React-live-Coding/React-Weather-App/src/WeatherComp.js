@@ -2,18 +2,24 @@ import React, { Component } from 'react'
 
 const API_KEY= "1d68185a8bf5aeed5e1de06743bc9c7d"
 
-const URL="https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}"
-
 
 export class WeatherComp extends Component {
     state={
         city:"Berlin",
-        temp:7,
-        maxTemp:14,
+        temp:70,
+        maxTemp:175754,
         minTemp:2,
-        description:"it is rainy today",
+        description:"it is rainy today", 
         code:"10d",
-        inputValue:""
+        inputValue:"",
+        errorMessage:""
+    }
+
+
+    componentDidMount(){
+        console.log("`********* first render finished ************`")
+        //onload
+        this.fetchWeatherData(this.state.city)
     }
 
     getCityName=(e)=>{
@@ -23,27 +29,53 @@ export class WeatherComp extends Component {
     submitForm=(e)=>{
         e.preventDefault()
         console.log("submitted data")
-        this.fetchWeatherData(this.state.inputValue)
+        if(this.state.inputValue.trim()!==""){
+            this.fetchWeatherData(this.state.inputValue) 
+        }else{
+            this.setState({errorMessage:"please enter city name in input field"})
+        }
+       
+    /*     this.setState({inputValue:""}) */
     }
 
     fetchWeatherData=(city)=>{
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`)
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`)
         .then(res=>res.json())
         .then(data=>{
-            console.log(data)
+            this.setState({
+                city:data.name
+                ,temp : data.main.temp
+                ,maxTemp : data.main.temp_max
+                ,minTemp: data.main.temp_min
+                ,description : data.weather[0].description
+                ,code : data.weather[0].icon
+
+            })
         })
     }
-    
+
+
+    shouldComponentUpdate(nextProps,nextState){
+        console.log("********** should component update*****************")
+        if(JSON.stringify(nextState)===JSON.stringify(this.state)){
+              return false;
+        }else{
+            return true
+        }
+    }
+
     render() {
 
-        const { city,temp,maxTemp,minTemp,description,code }  =    this.state
+        console.log("*************** render ************************")
+        const { city,temp,maxTemp,minTemp,description,code,inputValue,errorMessage }  =    this.state
 
         return (
             <div>
                 <form onSubmit={this.submitForm}>
-                    <input type="text" name="city" onChange={this.getCityName} />
+                    <input type="text" name="city" onChange={this.getCityName} value={inputValue} onFocus={()=>this.setState({errorMessage:""})} />
                     <input type="submit" value="get weather"/>
                 </form>
+                <h3 style={{color:"red", backgroundColor:"gray"}}>{errorMessage}</h3>
                 <div className="top">
                     <h2>{city}</h2>
                     <div className="image">
