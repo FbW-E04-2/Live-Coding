@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 
-const API_KEY= "1d68185a8bf5aeed5e1de06743bc9c7d"
-
 
 export class WeatherComp extends Component {
     state={
@@ -39,18 +37,23 @@ export class WeatherComp extends Component {
     }
 
     fetchWeatherData=(city)=>{
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`)
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}&units=metric`)
         .then(res=>res.json())
         .then(data=>{
-            this.setState({
-                city:data.name
-                ,temp : data.main.temp
-                ,maxTemp : data.main.temp_max
-                ,minTemp: data.main.temp_min
-                ,description : data.weather[0].description
-                ,code : data.weather[0].icon
 
-            })
+            if(data.cod===200){
+                this.setState({
+                    city:data.name
+                    ,temp : data.main.temp
+                    ,maxTemp : data.main.temp_max
+                    ,minTemp: data.main.temp_min
+                    ,description : data.weather[0].description
+                    ,code : data.weather[0].icon
+                })
+                
+            }else{
+                this.setState({errorMessage:data.message})
+            } 
         })
     }
 
