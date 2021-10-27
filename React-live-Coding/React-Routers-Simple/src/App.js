@@ -21,16 +21,19 @@ function App(){
        <li><Link to="/contact">Contact </Link></li>
      </ul>
 
-    {/* <Route exact path="/" component={Home}/> */}
-    <Route exact path="/">
+    <Route exact path="/" component={Home}/>
+    {/* <Route exact path="/">
       <Home/>
-    </Route>
+    </Route> */}
 
 
-  {/*   <Route path="/about" component={About}/> */}
+{/*     <Route path="/about" component={About}/> */}
     <Route path="/about">
-         <About/>
-    </Route>{/* without router props but get component props */}
+         <About name="naqvi"/>
+    </Route>    {/* without router props but get custom props */}
+
+{/* <Route path="/about" render={(props)=><About {...props} name="Naqvi" />}/> */}
+
 
     <Route path="/users" component={Users}/> {/* without component props but get router props */}
     <Route path="/contact" component={Contact}/>
