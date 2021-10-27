@@ -5,6 +5,8 @@ import ToDosContainer from "./components/ToDosContainer";
 import ToDonesContainer from "./components/ToDonesContainer";
 import { v4 as uuid } from "uuid";
 import About from "./components/About";
+import NotFound from "./components/NotFound";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 class App extends React.Component {
   state = {
@@ -16,15 +18,7 @@ class App extends React.Component {
     {text:"take breakfast", done:false},
     {text:"Watch movie" ,done:false} */
     ],
-    page: "home",
   };
-
-  switchPageToAbout=()=>{
-    this.setState({page:"about"})
-  }
-  switchPageToHome=()=>{
-    this.setState({page:"home"})
-  }
 
   addTask = (todotext) => {
     let task = { id: uuid(), text: todotext, done: false };
@@ -55,25 +49,30 @@ class App extends React.Component {
     let todones = this.state.todoList.filter((item) => item.done === true); // []
 
     return (
-      <div className="app">
-              <Navigation switchPageToAbout={this.switchPageToAbout}  switchPageToHome={this.switchPageToHome} />
-        {this.state.page==="home"? (
-          <div>
-            <ToDosContainer
-              todos={todos}
-              addTask={this.addTask}
-              updateTask={this.updateTask}
-            />
-            <ToDonesContainer
-              todones={todones}
-              updateTask={this.updateTask}
-              deleteTask={this.deleteTask}
-            />
-          </div>
-        ) : (
-          <About />
-        )}
-      </div>
+      <BrowserRouter>
+        <div className="app">
+          <Navigation />
+
+          <Switch>
+            <Route exact path="/">
+              <ToDosContainer
+                todos={todos}
+                addTask={this.addTask}
+                updateTask={this.updateTask}
+              />
+              <ToDonesContainer
+                todones={todones}
+                updateTask={this.updateTask}
+                deleteTask={this.deleteTask}
+              />
+            </Route>
+
+            <Route path="/about" component={About} />
+
+            <Route component={NotFound} />
+          </Switch>
+        </div>
+      </BrowserRouter>
     );
   }
 }

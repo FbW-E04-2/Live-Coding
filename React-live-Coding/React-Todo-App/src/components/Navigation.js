@@ -1,16 +1,18 @@
 import React from 'react'
 import logo from "../images/logo.png"
+import {Link} from "react-router-dom"
 
-export default function Navigation(props) {
+export default function Navigation() {
     return (
         <nav>
 
             <div className="left">
-                 <img src={logo} alt="logo image" onClick={props.switchPageToHome}/>   
+                <Link to="/"><img src={logo} alt="logo image"/>  </Link>
+                   
                  </div>
 
             <div className="right">
-                <a onClick={props.switchPageToAbout}>About</a>
+                <Link to="/about">About</Link>
                 
                  </div>
 
