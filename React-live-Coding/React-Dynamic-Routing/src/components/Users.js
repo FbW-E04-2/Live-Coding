@@ -23,7 +23,7 @@ export class Users extends Component {
                 <ul>
                 {this.state.users.map(user=>{
                     return (
-                            <li key={user.id}><Link to={`/users/${user.first_name}`}>{user.first_name} </Link> </li>
+                            <li key={user.id}> <Link to={{pathname:`/users/${user.first_name}`, state:user}}   >{user.first_name} </Link> </li>
                     )
                 })}
             </ul>
