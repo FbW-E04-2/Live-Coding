@@ -1,5 +1,5 @@
 import React, {createContext,useState,useEffect} from "react";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route} from "react-router-dom";
 import Home from "./components/Home"
 import Login from "./components/Login"
 import Navbar from "./components/Navbar"
@@ -14,7 +14,6 @@ import Products from "./components/Products"
 export const MyContext = createContext()
 
 function App() {
-
 
   const [user,setUser]=useState(null)
   const [products,setProducts]=useState([])
@@ -39,7 +38,7 @@ function App() {
       <div className="App">
         <Navbar/>
         <Routes> 
-          <Route path="/" element={<Home/>}/>
+          <Route path={"/"|| "/home"} element={<Home/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/profile" element={<Profile/>}/>
           <Route path="/products" element={<Products/>}/>

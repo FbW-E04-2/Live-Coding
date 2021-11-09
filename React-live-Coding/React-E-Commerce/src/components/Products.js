@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, {  useContext } from "react";
 import ReactStar from "react-rating-stars-component";
 import { MyContext } from "../App";
 import { Link } from "react-router-dom";
@@ -6,18 +6,20 @@ import { Link } from "react-router-dom";
 export default function Products() {
   const { products, setProducts } = useContext(MyContext);
 
-  console.log(products);
+/*   console.log(products); */
 
 
 
   return (
     <div style={{ display: "flex", flexWrap: "wrap" }}>
+
+   
       {products.map((product) => {
         return (
-          <div key={product.id} style={{ width: "300px" }}>
+          <div key={product.id} style={{ width: "300px",margin:"50px",padding:"10px", boxShadow:"5px 2px 20px gray" ,borderRadius:"10px",textAlign:"center"}}>
             <Link 
             to={`/products/${product.id}`} 
-         /*    state={product} */
+            state={product}
             >
               <img src={product.image} width="250" height="250" alt="" />
               <h3>{product.title}</h3>
@@ -35,6 +37,8 @@ export default function Products() {
           </div>
         );
       })}
+
+
     </div>
   );
 }
