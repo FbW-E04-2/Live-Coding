@@ -1,4 +1,4 @@
-import React, {createContext,useState} from "react";
+import React, {createContext,useState,useEffect} from "react";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home"
 import Login from "./components/Login"
@@ -21,6 +21,18 @@ function App() {
   const [cart,setCart]=useState([])
 
 
+  const fetchProducts = async () => {
+    let res = await fetch("https://fakestoreapi.com/products");
+    let data = await res.json();
+    setProducts(data);
+  };
+
+  useEffect(() => {
+    //componentDidMount
+    fetchProducts();
+  }, []);
+
+
   return (
     <MyContext.Provider value={{user,setUser,products,setProducts,cart,setCart}}>
     <HashRouter>
@@ -33,7 +45,7 @@ function App() {
           <Route path="/products" element={<Products/>}/>
           <Route path="/contact" element={<Contact/>}/>
           <Route path="/cart" element={<Cart/>} />
-          <Route path="/products/:productname" element={<SingleProduct/>}/>
+          <Route path="/products/:id" element={<SingleProduct/>}/>
           <Route path="*" element={<NotFound/>} />
         </Routes>
       </div>
