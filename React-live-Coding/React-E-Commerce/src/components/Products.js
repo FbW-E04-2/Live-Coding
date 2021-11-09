@@ -4,11 +4,33 @@ import { MyContext } from "../App";
 import { Link } from "react-router-dom";
 
 export default function Products() {
-  const { products, setProducts } = useContext(MyContext);
+  const { products, cart,setCart } = useContext(MyContext);
 
 /*   console.log(products); */
 
 
+const AddToCart=(product)=>{
+    //if this product already exist inside our cart
+   let checkItem = cart.find(elem=>elem.title===product.title)
+
+    if(checkItem){
+        let copyItem= {...checkItem}
+        copyItem.quantity++;
+        let updatedItem=cart.map(prod=> {
+            if(prod.title===copyItem.title){
+                return copyItem
+            }else{
+                return prod
+            }
+        })
+        setCart(updatedItem)
+    }else{ 
+        let copyProduct= {...product}
+        copyProduct.quantity=1 ; 
+        setCart([...cart, copyProduct])
+     } 
+   
+}
 
   return (
     <div style={{ display: "flex", flexWrap: "wrap" }}>
@@ -25,7 +47,7 @@ export default function Products() {
               <h3>{product.title}</h3>
             </Link>
             <h2>$ {product.price}</h2>
-            <button>Add To Cart</button>
+            <button onClick={()=>AddToCart(product)}>Add To Cart</button>
             <ReactStar
               count={5}
               size={24}
