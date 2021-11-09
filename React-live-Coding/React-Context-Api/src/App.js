@@ -1,5 +1,5 @@
 
-import React, {useState, createContext} from 'react';
+import React, {useState, createContext,useEffect} from 'react';
 import Child1 from './Child1';
 import Child2 from './Child2';
 
@@ -10,10 +10,23 @@ console.log(MyContext)
 function App() {
   const [count,setCount]= useState(0)
   const [student,setStudent]=useState({name:"William",age:34})
+  const [data,setData]=useState([])
+  
+  const getWeather=(cityname)=>{
+    fetch(`https:weatherdata / ? ${cityname}`)
+    .then()
+    .then(
+      (result)=>
+      setData(result)
+    )
+  }
+  useEffect(()=>{
+    getWeather("berlin")
+  },[])
 
 
   return (
-    <MyContext.Provider value={{count, setCount ,student,setStudent}}> 
+    <MyContext.Provider value={{count, setCount ,student,setStudent,getWeather,data}}> 
       <div className="App">
         <h1>App is our Parent Component</h1>
         <Child1 />
