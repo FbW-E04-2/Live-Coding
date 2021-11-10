@@ -53,17 +53,6 @@ export default function Login() {
         .catch(err=>console.log(err.message))
     }
 
-  /*   useEffect(()=>{
-       let unsubscribe =  onAuthStateChanged(auth)
-        .then(userInfo=>{
-            setUser(userInfo.user)
-            navigate("/", {replace:true})
-        })
-        .catch(err=>console.log(err.message))
-
-        return unsubscribe
-    },[]) */
-
     return (
         <div>
             <h1>Login Page</h1>
