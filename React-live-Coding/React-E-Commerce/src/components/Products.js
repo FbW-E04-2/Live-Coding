@@ -33,15 +33,15 @@ const AddToCart=(product)=>{
 }
 
   return (
-      <div style={{background:"linear-gradient(60deg,yellow,black)"}}>
+      <div style={{background:"linear-gradient(60deg,yellow,black)" ,scrollbarWidth:"2px" }}>
           <h1 style={{color:"white",textAlign:"center",backgroundColor:"black"}}>Products</h1>
      
-    <div style={{ display: "flex", flexWrap: "wrap" }}>
+    <div style={{ display: "flex", flexWrap: "wrap"}}>
 
 
       {products.map((product) => {
         return (
-          <div key={product.id} style={{ width: "300px",margin:"50px",padding:"10px", boxShadow:"5px 2px 20px white" ,borderRadius:"10px",textAlign:"center"}}>
+          <div key={product.id} style={{ width: "300px",margin:"0 50px",padding:"10px", boxShadow:"5px 2px 20px white" ,borderRadius:"10px",textAlign:"center"}}>
             <Link 
             to={`/products/${product.id}`} 
             state={product}
