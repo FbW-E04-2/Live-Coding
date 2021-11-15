@@ -1,4 +1,45 @@
-import React, { useRef,useState } from "react";
+import React,{useRef,useEffect} from 'react'
+import Child from './Child'
+
+
+export default function App() {
+
+  const myRef= useRef()
+
+useEffect(()=>{
+  console.log(myRef.current)
+},[])
+
+  
+  return (
+    <div>
+      <h1>useImperativeHandle</h1>
+      <Child ref={myRef}/>
+      <button onClick={()=>myRef.current.printName("Naqvi")}>call print function </button>
+      <button onClick={()=>myRef.current.focus()}>focus input</button>
+      <button onClick={()=>myRef.current.focusSecondInput()}>focus second input field</button>
+    </div>
+  )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* import React, { useRef,useState } from "react";
 
 function App() {
   const formRef = useRef();
@@ -48,3 +89,4 @@ function App() {
 }
 
 export default App;
+ */
