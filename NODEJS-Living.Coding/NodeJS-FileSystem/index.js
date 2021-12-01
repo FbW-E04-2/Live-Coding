@@ -1,6 +1,13 @@
 const fs = require("fs")
+const {exec} = require("child_process")
 
-console.log("start")
+exec("code", (err,stdout, stderr )=>{
+    console.log(stdout)
+})
+
+
+/* 
+console.log("start") */
 //make directory 
 
 /* fs.mkdirSync("./folder") */
@@ -36,16 +43,16 @@ fs.writeFileSync("./App.js", data) */
 
 //what are the streams in nodejs
 
-let readStream = fs.createReadStream("./test.txt")
+/* let readStream = fs.createReadStream("./test.txt")
 let writeStream = fs.createWriteStream("./copyfile.txt") 
-readStream.pipe(writeStream)
+readStream.pipe(writeStream) */
 
 /* readStream.on("data",(data)=>{
     console.log(data)
     writeStream.write(data)
 }) */
 
-console.log("end")
+/* console.log("end") */
 
 
 
