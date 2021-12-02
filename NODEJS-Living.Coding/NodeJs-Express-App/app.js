@@ -3,6 +3,7 @@ const express= require("express")
 //create express server
 const app = express()
 
+//serve static files
 app.use(express.static(__dirname+"/static"))
 
 const PORT = process.env.PORT || 4000;
