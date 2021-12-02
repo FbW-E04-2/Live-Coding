@@ -18,6 +18,7 @@ app.get("/",(req,res)=>{
 //routes /endpoints /about
 app.get("/about",(req,res)=>{
     res.sendFile("./about.html",{root:__dirname})
+    /* res.sendFile(__dirname+"/about.html") */
 })
 
 //routes /endpoints /profile
