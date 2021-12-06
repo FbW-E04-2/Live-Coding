@@ -34,9 +34,9 @@ router.get("/",(req,res)=>{
 router.get("/:id", (req,res)=>{
     const user = users.find(elem =>elem.id === Number(req.params.id))
     if(user){
-        res.send(user)
+        res.status(201).send(user)
     }else{
-        res.send("no such user avaiable in our system")
+        res.status(404).send("no such user avaiable in our system")
     }
     
 })
