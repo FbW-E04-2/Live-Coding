@@ -4,8 +4,8 @@ const router = express.Router()
 
 
 //endpoint //get request
-router.get("/",  (req,res,next)=>{
-    //resolve absolute path using oath module
+router.get("/",  (req,res)=>{
+    //resolve absolute path using path module
      res.sendFile(path.resolve(__dirname ,"../views/index.html"))
 })
 

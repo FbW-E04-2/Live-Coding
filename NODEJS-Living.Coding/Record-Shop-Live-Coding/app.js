@@ -6,10 +6,15 @@ const indexRoute = require("./routes/indexRoute")
 const usersRoute = require("./routes/usersRoute")
 //set Port
 const PORT = process.env.PORT || 4000;
- 
+
+//express middleware to parsing json data 
+app.use(express.json())
+
+
 //index route
 app.use("/", indexRoute)
 app.use("/users", usersRoute)
+
 
 
 //listening for any request coming on port 4000
