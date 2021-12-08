@@ -17,20 +17,20 @@ const users = JSON.parse(data).users; */
 
 //Read Users
 //endpoint /users
-router.get("/", (req, res) => {
+router.get("/", (req, res,next) => {
   const users = db.get("users").value();
-  res.send(users);
+  res.send({success:true, data: users});
 });
 
 //Create new User
-router.post("/", (req, res) => {
+router.post("/", (req, res,next) => {
   db.get("users").push(req.body).write();
-  res.send("new user is created");
+  res.send({success:true, data:req.body });
 });
 
 //Request method PUT (replacing existing resource) and PATCH (updating existing resource)
 //Update user
-router.put("/:id", (req, res) => {
+router.put("/:id", (req, res,next) => {
   const user = db
     .get("users")
     .find({ id: Number(req.params.id) })
@@ -39,12 +39,12 @@ router.put("/:id", (req, res) => {
     if(user){
        res.send(user) 
     }else{
-        res.send("no such user found")
+        next()
     }
 });
 
 //Patch
-router.patch("/:id", (req, res) => {
+router.patch("/:id", (req, res,next) => {
     const user = db
     .get("users")
     .find({ id: Number(req.params.id) })
@@ -53,28 +53,42 @@ router.patch("/:id", (req, res) => {
     if(user){
        res.send(user) 
     }else{
-        res.send("no such user found")
+      const err= new Error("no such user found")
+      err.status=404
+        next(err)
     }
 });
 
 //Delete request
 //delete user
-router.delete("/:id", (req, res) => {
-  db.get("users").remove({id:Number(req.params.id)}).write()
+router.delete("/:id", (req, res,next) => {
+  const user =db.get("users").find({id:Number(req.params.id)}).value()
+  if(user){
+     db.get("users").remove({id:Number(req.params.id)}).write()
   res.send("user deleted successfully");
+  }else{
+    const err= new Error("there is no such user with that id")
+    /* err= {message:"there is no such user with that id" } */
+    err.status=404
+     /* err= {message:"there is no such user with that id",status:404 } */
+    next(err)
+  }
+ 
 });
 
 //Read User
 //endpoint /users/:id
-router.get("/:id", (req, res) => {
+router.get("/:id", (req, res,next) => {
   const user = db
     .get("users")
     .find({ id: Number(req.params.id) })
     .value();
+    console.log(user)
   if (user) {
     res.status(200).send(user);
   } else {
-    res.status(404).send("no such user avaiable in our system");
+    const err = new Error("no such user available")
+    next(err)
   }
 });
 
