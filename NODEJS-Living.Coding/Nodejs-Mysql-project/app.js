@@ -8,7 +8,7 @@ app.use(express.json())
 const connection = mysql.createConnection({
     host     :'localhost',
    user     : 'root',
-   password : 'Naqvi@123',
+   password : 'Naqvi@1234',
    database : 'dci' 
 })
 
@@ -32,10 +32,17 @@ app.get("/showdatabases", (req,res)=>{
 })
 
 app.post("/addnewclass", (req,res)=>{
-    const keys= Object.keys(req.body)
-    const values= Object.values(req.body)
 
     connection.query(`
+    insert into classes(course_name,student_numbers,course_id) values(?,?,?)`,Object.values(req.body),(err,table,fields)=>{
+        res.send(table)
+    } )
+
+    //for update values inside table
+  /*   connection.query(`update table classes set course_name=? , course_id=?` ,["fbw32" ,5],(err,table,fields)=>{}) */
+
+
+   /*  connection.query(`
     insert into classes 
     (${keys[0]}, 
     ${keys[1]}, 
@@ -51,7 +58,7 @@ app.post("/addnewclass", (req,res)=>{
         }else{
             res.send(table)
         }
-    })
+    }) */
 })
 
 
