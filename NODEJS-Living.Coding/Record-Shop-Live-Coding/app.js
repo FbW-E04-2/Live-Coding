@@ -2,6 +2,7 @@ const express =require("express")
 
 //create express server
 const app = express()
+const cors= require("cors")
 const indexRoute = require("./routes/indexRoute")
 const usersRoute = require("./routes/usersRoute")
 //set Port
@@ -9,8 +10,8 @@ const PORT = process.env.PORT || 4000;
 
 //express middleware to parsing json data 
 app.use(express.json())
-
-
+//cors middleware
+app.use(cors())
 
 //index route
 app.use("/", indexRoute)

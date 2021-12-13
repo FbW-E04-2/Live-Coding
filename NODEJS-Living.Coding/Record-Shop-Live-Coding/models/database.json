@@ -14,7 +14,18 @@
       "last_name": "Ferguson",
       "avatar": "https://reqres.in/img/faces/8-image.jpg"
     },
-    {}
+    {
+      "first_name": "Syed",
+      "last_name": "Naqvi",
+      "email": "nomanalam7214@gmail.com",
+      "avatar": "https://reqres.in/img/faces/8-image.jpg"
+    },
+    {
+      "first_name": "Ali",
+      "last_name": "baba",
+      "email": "testq@gmail.com",
+      "avatar": "https://reqres.in/img/faces/4-image.jpg"
+    }
   ],
   "records": [],
   "orders": []
