@@ -37,7 +37,7 @@ router.put("/:id", (req, res,next) => {
     .assign({...req.body})
     .write()
     if(user){
-       res.send(user) 
+      res.send({success:true, data:db.get("users").value()}) 
     }else{
         next()
     }
@@ -45,13 +45,14 @@ router.put("/:id", (req, res,next) => {
 
 //Patch
 router.patch("/:id", (req, res,next) => {
+  console.log(req.body)
     const user = db
     .get("users")
     .find({ id: Number(req.params.id) })
     .assign({...req.body})
     .write()
     if(user){
-       res.send(user) 
+       res.send({success:true, data:db.get("users").value()}) 
     }else{
       const err= new Error("no such user found")
       err.status=404
@@ -65,7 +66,8 @@ router.delete("/:id", (req, res,next) => {
   const user =db.get("users").find({id:Number(req.params.id)}).value()
   if(user){
      db.get("users").remove({id:Number(req.params.id)}).write()
-  res.send("user deleted successfully");
+     
+  res.send({success:true, data: db.get("users").value() });
   }else{
     const err= new Error("there is no such user with that id")
     /* err= {message:"there is no such user with that id" } */
