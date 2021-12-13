@@ -89,7 +89,7 @@ function App() {
       <button onClick={fetchData}>fetch users</button>
       {users.map((user) => {
         return (
-          <User deleleUser={deleteUser} editUser={editUser}  user={user}/>
+          <User deleteUser={deleteUser} editUser={editUser}  user={user}/>
         );
       })}
     </div>
