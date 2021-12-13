@@ -8,6 +8,9 @@ const usersRoute = require("./routes/usersRoute")
 //set Port
 const PORT = process.env.PORT || 4000;
 
+//server static files
+/* app.use(express.static(__dirname+"/build"))  */
+
 //express middleware to parsing json data 
 app.use(express.json())
 //cors middleware
