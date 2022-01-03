@@ -18,6 +18,7 @@ app.use(cors())
 
 //index route
 app.use("/", indexRoute)
+//users route
 app.use("/users", usersRoute)
 
 //handling 404 page not
