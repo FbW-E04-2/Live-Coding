@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const UsersCollection= require("../models/UsersSchema")
+const RecordsCollection= require("../models/RecordsSchema")
 
 /* const data = fs.readFileSync(path.resolve(__dirname, "../models/db.json"),"utf-8")
 
@@ -13,12 +13,12 @@ const users = JSON.parse(data).users; */
 //Update
 //Delete
 
-//Read Users
-//endpoint /users
+//Read Records
+//endpoint /records
 router.get("/", async (req, res,next) => {
   try{
-    const users = await UsersCollection.find()
-    res.send({success:true, data: users}); 
+    const records = await RecordsCollection.find()
+    res.send({success:true, data: records}); 
   }
   catch(err){
     next(err)
@@ -26,12 +26,12 @@ router.get("/", async (req, res,next) => {
  
 });
 
-//Create new User
+//Create new record
 router.post("/", async (req, res,next) => {
   try{
-    const user = new UsersCollection(req.body)
-    await user.save()
-    res.json({success:true, data:user });
+    const record = new RecordsCollection(req.body)
+    await record.save()
+    res.json({success:true, data:record });
   }
   catch(err){
     next(err)
@@ -39,11 +39,11 @@ router.post("/", async (req, res,next) => {
 });
 
 //Request method PUT (replacing existing resource) and PATCH (updating existing resource)
-//Update user
+//Update record
 router.put("/:id", async (req, res,next) => {
   try{
-    const user = await UsersCollection.findByIdAndUpdate(req.params.id, req.body,{new:true})
-    res.send({success:true,data:user})
+    const record = await RecordsCollection.findByIdAndUpdate(req.params.id, req.body,{new:true})
+    res.send({success:true,data:record})
   }
   catch(err){
     next(err)
@@ -54,8 +54,8 @@ router.put("/:id", async (req, res,next) => {
 //Patch
 router.patch("/:id", async (req, res,next) => {
   try{
-    const user = await UsersCollection.findByIdAndUpdate(req.params.id, req.body,{new:true})
-    res.send({success:true,data:user})
+    const record = await RecordsCollection.findByIdAndUpdate(req.params.id, req.body,{new:true})
+    res.send({success:true,data:record})
   }
   catch(err){
     next(err)
@@ -63,11 +63,11 @@ router.patch("/:id", async (req, res,next) => {
 });
 
 //Delete request
-//delete user
+//delete record
 router.delete("/:id", async (req, res,next) => {
  try{
-   const user = await UsersCollection.findByIdAndDelete(req.params.id)
-   res.send({success:true,data:user})
+   const record = await RecordsCollection.findByIdAndDelete(req.params.id)
+   res.send({success:true,data:record})
  }
  catch(err){
    next(err)
@@ -75,12 +75,12 @@ router.delete("/:id", async (req, res,next) => {
  
 });
 
-//Read User
-//endpoint /users/:id
+//Read record
+//endpoint /records/:id
 router.get("/:id", async(req, res,next) => {
 try{
-  const user = await UsersCollection.findOne({_id:req.params.id})
-  res.send({success:true,data:user})
+  const record = await RecordsCollection.findOne({_id:req.params.id})
+  res.send({success:true,data:record})
 }
 catch(err){
   next(err)

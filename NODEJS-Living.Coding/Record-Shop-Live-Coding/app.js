@@ -5,6 +5,7 @@ const app = express()
 const cors= require("cors")
 const indexRoute = require("./routes/indexRoute")
 const usersRoute = require("./routes/usersRoute")
+const recordsRoute = require("./routes/recordsRoute")
 //set Port
 const PORT = process.env.PORT || 4000;
 
@@ -27,6 +28,9 @@ app.use(cors())
 app.use("/", indexRoute)
 //users route
 app.use("/users", usersRoute)
+
+//records route
+app.use("/records",recordsRoute)
 
 //handling 404 page not
 app.use((req,res,next)=>{
