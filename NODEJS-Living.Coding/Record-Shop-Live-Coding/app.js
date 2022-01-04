@@ -1,5 +1,5 @@
 const express =require("express")
-
+const mongoose = require("mongoose")
 //create express server
 const app = express()
 const cors= require("cors")
@@ -7,6 +7,13 @@ const indexRoute = require("./routes/indexRoute")
 const usersRoute = require("./routes/usersRoute")
 //set Port
 const PORT = process.env.PORT || 4000;
+
+
+//create mongoose connection
+mongoose.connect("mongodb://127.0.0.1:27017/record-shop-live-database",()=>{
+    console.log("connection established ....... with mongo")
+})
+
 
 //server static files
 /* app.use(express.static(__dirname+"/build"))  */

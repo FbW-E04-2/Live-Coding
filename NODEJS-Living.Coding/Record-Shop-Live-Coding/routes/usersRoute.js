@@ -3,6 +3,7 @@ const router = express.Router();
 const path = require("path");
 const fs = require("fs");
 const db = require("../models/db");
+const UsersCollection= require("../models/UsersSchema")
 
 /* const data = fs.readFileSync(path.resolve(__dirname, "../models/db.json"),"utf-8")
 
@@ -17,15 +18,30 @@ const users = JSON.parse(data).users; */
 
 //Read Users
 //endpoint /users
-router.get("/", (req, res,next) => {
-  const users = db.get("users").value();
-  res.send({success:true, data: users});
+router.get("/", async (req, res,next) => {
+  try{
+    const users = await UsersCollection.find()
+    res.send({success:true, data: users}); 
+  }
+  catch(err){
+    next(err)
+  }
+ 
 });
 
 //Create new User
-router.post("/", (req, res,next) => {
-  db.get("users").push(req.body).write();
-  res.send({success:true, data:req.body });
+router.post("/", async (req, res,next) => {
+  try{
+    const user = new UsersCollection(req.body)
+    await user.save()
+    res.json({success:true, data:user });
+  }
+  catch(err){
+    next(err)
+  }
+
+
+ 
 });
 
 //Request method PUT (replacing existing resource) and PATCH (updating existing resource)
