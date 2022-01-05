@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcrypt")
 const UsersCollection= require("../models/UsersSchema")
 
 /* const data = fs.readFileSync(path.resolve(__dirname, "../models/db.json"),"utf-8")
@@ -29,7 +30,10 @@ router.get("/", async (req, res,next) => {
 //Create new User
 router.post("/", async (req, res,next) => {
   try{
-    const user = new UsersCollection(req.body)
+    const hashPassword=bcrypt.hashSync(req.body.password, 10) 
+    console.log(hashPassword)
+  
+    const user = new UsersCollection({...req.body, password:hashPassword})
     await user.save()
     res.json({success:true, data:user });
   }
@@ -54,7 +58,9 @@ router.put("/:id", async (req, res,next) => {
 //Patch
 router.patch("/:id", async (req, res,next) => {
   try{
-    const user = await UsersCollection.findByIdAndUpdate(req.params.id, req.body,{new:true})
+    const user = await UsersCollection.findById(req.params.id)
+    user.firstname=req.body.firstname;
+    user.save()
     res.send({success:true,data:user})
   }
   catch(err){
@@ -80,6 +86,7 @@ router.delete("/:id", async (req, res,next) => {
 router.get("/:id", async(req, res,next) => {
 try{
   const user = await UsersCollection.findOne({_id:req.params.id})
+  /* console.log(`${user.firstname} ${user.lastname}`) */
   res.send({success:true,data:user})
 }
 catch(err){
