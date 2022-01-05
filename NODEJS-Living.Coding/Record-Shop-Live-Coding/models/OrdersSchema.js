@@ -1,13 +1,16 @@
-const mongoose=require("mongoose")
-const {Schema}=mongoose
+const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
-const OrderSchema=new Schema({
-    record:{type:String},
-    quantity:{type:Number}
-})
+const orderSchema = new Schema({
+  userid: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
+  records: [
+    {
+      recordid: { type: mongoose.Schema.Types.ObjectId, ref: "records" },
+      quantity: { type: Number },
+    },
+  ]
+});
 
+const OrdersCollection = mongoose.model("orders", orderSchema);
 
-const OrdersCollection= mongoose.model("orders",OrderSchema)
-
-
-module.exports=OrdersCollection
+module.exports = OrdersCollection;
