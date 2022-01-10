@@ -15,8 +15,9 @@ const users = JSON.parse(data).users; */
 
 //Read Records
 //endpoint /records
-router.get("/", async (req, res,next) => {
+router.get("/" ,async (req, res,next) => {
   try{
+    console.log(req.cookies)
     const records = await RecordsCollection.find()
     res.send({success:true, data: records}); 
   }

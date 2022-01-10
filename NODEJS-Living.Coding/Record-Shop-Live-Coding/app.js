@@ -7,6 +7,7 @@ const indexRoute = require("./routes/indexRoute")
 const usersRoute = require("./routes/usersRoute")
 const recordsRoute = require("./routes/recordsRoute")
 const ordersRoute = require("./routes/ordersRoute")
+const cookieParser= require("cookie-parser")
 //set Port
 const PORT = process.env.PORT || 4000;
 
@@ -22,7 +23,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/record-shop-live-database",()=>{
 app.use(express.json())
 //cors middleware
 app.use(cors())
-
+app.use(cookieParser())
 
 
 //index route
