@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt")
 const UsersCollection= require("../models/UsersSchema")
-
+const validationMiddlewares= require("../middlewares/ValidationRules")
+const {validationResult} = require("express-validator")
 /* const data = fs.readFileSync(path.resolve(__dirname, "../models/db.json"),"utf-8")
 
 console.log(JSON.parse(data))
@@ -16,7 +17,7 @@ const users = JSON.parse(data).users; */
 
 //Read Users
 //endpoint /users
-router.get("/", async (req, res,next) => {
+router.get("/" , async (req, res,next) => {
   try{
     const users = await UsersCollection.find()
     res.send({success:true, data: users}); 
@@ -27,15 +28,31 @@ router.get("/", async (req, res,next) => {
  
 });
 
+
 //Create new User
-router.post("/", async (req, res,next) => {
+router.post("/",validationMiddlewares, async (req, res,next) => {
+  
   try{
-    const hashPassword=bcrypt.hashSync(req.body.password, 10) 
+    const errors= validationResult(req)
+
+   /*  console.log(errors) */
+    if(!errors.isEmpty()){
+        //{email:"please pro... ", password:"pprovide valid pass...."}
+      let message= errors.array().reduce((acc,item)=>{
+          acc[item.param]=item.msg
+          return acc
+      }, {})
+
+      next({status:401, message:message})
+    }else{
+        const hashPassword=bcrypt.hashSync(req.body.password, 10) 
     console.log(hashPassword)
   
     const user = new UsersCollection({...req.body, password:hashPassword})
     await user.save()
     res.json({success:true, data:user });
+    }
+  
   }
   catch(err){
     next(err)

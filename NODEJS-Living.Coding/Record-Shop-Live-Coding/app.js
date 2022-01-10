@@ -15,8 +15,6 @@ const PORT = process.env.PORT || 4000;
 mongoose.connect("mongodb://127.0.0.1:27017/record-shop-live-database",()=>{
     console.log("connection established ....... with mongo")
 })
-
-
 //server static files
 /* app.use(express.static(__dirname+"/build"))  */
 
@@ -24,6 +22,8 @@ mongoose.connect("mongodb://127.0.0.1:27017/record-shop-live-database",()=>{
 app.use(express.json())
 //cors middleware
 app.use(cors())
+
+
 
 //index route
 app.use("/", indexRoute)
