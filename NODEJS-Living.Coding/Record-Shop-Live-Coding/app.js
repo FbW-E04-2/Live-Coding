@@ -8,6 +8,7 @@ const usersRoute = require("./routes/usersRoute")
 const recordsRoute = require("./routes/recordsRoute")
 const ordersRoute = require("./routes/ordersRoute")
 const cookieParser= require("cookie-parser")
+const authentication = require("./middlewares/auth")
 //set Port
 const PORT = process.env.PORT || 4000;
 
@@ -32,10 +33,10 @@ app.use("/", indexRoute)
 app.use("/users", usersRoute)
 
 //records route
-app.use("/records",recordsRoute)
+app.use("/records",authentication,recordsRoute)
 
 //orders route
-app.use("/orders",ordersRoute)
+app.use("/orders",authentication,ordersRoute)
 //handling 404 page not
 app.use((req,res,next)=>{
     res.sendFile(__dirname+"/views/notfound.html")  
@@ -43,7 +44,7 @@ app.use((req,res,next)=>{
 
 
 //error handler middleware// universal error handler
-app.use((err,req,res,next)=>{
+app.use((err,request,res,next)=>{
     res.status(err.status || 500).send({success:false, message: err.message})
 })
 

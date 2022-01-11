@@ -1,4 +1,5 @@
 const express = require("express");
+const authentication = require("../middlewares/auth");
 const router = express.Router();
 const RecordsCollection= require("../models/RecordsSchema")
 
@@ -15,11 +16,10 @@ const users = JSON.parse(data).users; */
 
 //Read Records
 //endpoint /records
-router.get("/" ,async (req, res,next) => {
-  try{
-    console.log(req.cookies)
-    const records = await RecordsCollection.find()
-    res.send({success:true, data: records}); 
+router.get("/" ,  async (req, res,next) => {
+try{
+ const records = await RecordsCollection.find()
+ res.send({success:true, data: records}); 
   }
   catch(err){
     next(err)
