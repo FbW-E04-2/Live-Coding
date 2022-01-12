@@ -33,7 +33,7 @@ app.use("/", indexRoute)
 app.use("/users", usersRoute)
 
 //records route
-app.use("/records",authentication,recordsRoute)
+app.use("/records",recordsRoute)
 
 //orders route
 app.use("/orders",authentication,ordersRoute)

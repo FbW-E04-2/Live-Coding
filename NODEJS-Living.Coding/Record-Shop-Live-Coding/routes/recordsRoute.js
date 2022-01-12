@@ -28,7 +28,7 @@ try{
 });
 
 //Create new record
-router.post("/", async (req, res,next) => {
+router.post("/",authentication, async (req, res,next) => {
   try{
     const record = new RecordsCollection(req.body)
     await record.save()
@@ -41,7 +41,7 @@ router.post("/", async (req, res,next) => {
 
 //Request method PUT (replacing existing resource) and PATCH (updating existing resource)
 //Update record
-router.put("/:id", async (req, res,next) => {
+router.put("/:id",authentication, async (req, res,next) => {
   try{
     const record = await RecordsCollection.findByIdAndUpdate(req.params.id, req.body,{new:true})
     res.send({success:true,data:record})
@@ -53,7 +53,7 @@ router.put("/:id", async (req, res,next) => {
 });
 
 //Patch
-router.patch("/:id", async (req, res,next) => {
+router.patch("/:id",authentication, async (req, res,next) => {
   try{
     const record = await RecordsCollection.findByIdAndUpdate(req.params.id, req.body,{new:true})
     res.send({success:true,data:record})
@@ -65,7 +65,7 @@ router.patch("/:id", async (req, res,next) => {
 
 //Delete request
 //delete record
-router.delete("/:id", async (req, res,next) => {
+router.delete("/:id",authentication, async (req, res,next) => {
  try{
    const record = await RecordsCollection.findByIdAndDelete(req.params.id)
    res.send({success:true,data:record})
