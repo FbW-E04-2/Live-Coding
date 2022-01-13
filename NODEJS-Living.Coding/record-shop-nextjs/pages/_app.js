@@ -3,7 +3,7 @@ import "bulma/css/bulma.css"
 import Nav from "../components/Nav"
 function App({ Component, pageProps }) {
   
-  return <div>
+  return <div className="container">
     <Nav/>
     <Component {...pageProps} />
 

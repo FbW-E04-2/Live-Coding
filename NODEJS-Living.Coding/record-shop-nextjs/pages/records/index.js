@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-//SSG ///pre-rendering
+//SSG ///pre-rendering //at build time
 export async function getStaticProps(context){
     const res = await fetch("http://localhost:4000/records")
     const result = await res.json()
@@ -10,7 +10,7 @@ export async function getStaticProps(context){
 }
 //this is usefull incase of stale/static data 
 
-//SSR (server side rendering)
+//SSR (server side rendering) 
 /* export async function getServerSideProps(){
     const res = await fetch("http://localhost:4000/records")
     const result = await res.json()
