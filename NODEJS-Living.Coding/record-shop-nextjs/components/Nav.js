@@ -1,6 +1,17 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useContext } from "react";
+import { MyContext } from "./context/Context";
 
 export default function nav() {
+  const {isRegister,user,setUser}= useContext(MyContext)
+  const router =useRouter()
+
+  const logoutUser=()=>{
+    setUser(null)
+    localStorage.removeItem("token")
+    router.push("/")
+  }
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
@@ -30,25 +41,33 @@ export default function nav() {
           <Link href="/records" >
             <a className="navbar-item">Records</a>
           </Link>
-          <Link href="/orders">
+          <Link href="/cart" >
+            <a className="navbar-item">Cart</a>
+          </Link>
+          {user && <> <Link href="/orders">
             <a className="navbar-item">Orders</a>
           </Link>
-          <Link href="/orders">
+          <Link href="/users">
             <a className="navbar-item">Users</a>
-          </Link>
+          </Link></>}
+         
         </div>
 
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              <Link href="/signup">
+              {user ?
+                <a className="button is-light" onClick={logoutUser}>Log Out</a>
+              :<> {!isRegister &&  <Link href="/signup">
                 <a className="button is-primary">
                   <strong>Sign up</strong>
                 </a>
-              </Link>
+              </Link>}
+             
               <Link href="/login">
                 <a className="button is-light">Log in</a>
-              </Link>
+              </Link></>  }
+              
             </div>
           </div>
         </div>

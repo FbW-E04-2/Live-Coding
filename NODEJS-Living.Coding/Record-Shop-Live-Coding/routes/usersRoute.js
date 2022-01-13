@@ -109,7 +109,7 @@ router.post("/login",async (req,res,next)=>{
       user.token= token;
       await user.save()
       
-      res.header("token",token).send({success:true, data:"authenticated"})
+      res.header("token",token).send({success:true, data:user})
     }else{
       next({message:"password doesn't match"})
     }

@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import Head from "next/head";
+import { MyContext } from "../components/context/Context";
+import { useRouter } from "next/router";
 export default function Login() {
+
+  const {setToken,setUser} =useContext(MyContext)
+
+  const router= useRouter()
+  console.log(router)
+
   const loginUser = (e) => {
     e.preventDefault();
     let user = {
@@ -16,9 +24,14 @@ export default function Login() {
       console.log(res.headers.get("token"))
       let token = res.headers.get("token")
       localStorage.setItem("token",token)
+      setToken(token)
       return res.json()})
     .then(result=>{
-      console.log(result)
+      if(result.success){
+        setUser(result.data)
+        e.target.reset()
+        router.push("/")
+      }
     })
   };
   return (

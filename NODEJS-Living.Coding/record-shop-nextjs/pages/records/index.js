@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react"
-
+import { useContext, useEffect, useState } from "react"
+import {MyContext} from "../../components/context/Context"
 //SSG ///pre-rendering //at build time
-export async function getStaticProps(context){
+/* export async function getStaticProps(context){
     const res = await fetch("http://localhost:4000/records")
     const result = await res.json()
     return {
         props:{ records:result.data}
     }
-}
+} */
 //this is usefull incase of stale/static data 
 
 //SSR (server side rendering) 
@@ -24,7 +24,8 @@ export async function getStaticProps(context){
 import useSWR from "swr"
 
 export default function Records(props) {
-console.log(props)
+
+    const {cart,setCart} =useContext(MyContext)
     /*  const [records,setRecords] =useState([])  */
 //CSR client side rendering
     /* useEffect(()=>{
@@ -53,6 +54,15 @@ if(error){
     return (<h2>something is going wrong</h2>)
 }
 
+
+const addToCart=(item)=>{
+    let existingRecord= cart.find(record=>record._id===item._id)
+    if(!existingRecord){
+        setCart([...cart, item]) 
+    }
+   
+}
+
     return (
         <div>
             <h1>records page</h1>
@@ -62,7 +72,7 @@ if(error){
                         <h2>{record.title}</h2>
                         <h3>{record.artist}</h3>
                         <h3>$ {record.price}</h3>
-                        <button>add to cart</button>
+                        <button onClick={()=>addToCart(record)}>add to cart</button>
                     </div>
                 )
             })}

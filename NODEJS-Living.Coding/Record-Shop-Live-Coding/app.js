@@ -37,6 +37,13 @@ app.use("/records",recordsRoute)
 
 //orders route
 app.use("/orders",authentication,ordersRoute)
+
+app.get("/verifytoken",authentication, (req,res,next)=>{
+    const user = req.user
+    console.log(req.user)
+    res.send({success:true, data:user})
+})
+
 //handling 404 page not
 app.use((req,res,next)=>{
     res.sendFile(__dirname+"/views/notfound.html")  

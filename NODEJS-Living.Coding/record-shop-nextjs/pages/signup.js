@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Head from "next/head"
+import { MyContext } from '../components/context/Context'
 export default function Signup() {
 
+    const {user,setUser} = useContext(MyContext)
 
     const registerUser=(e)=>{
         e.preventDefault()
@@ -22,6 +24,7 @@ export default function Signup() {
             if(result.success){
                 localStorage.setItem("isRegistered","true")
                 console.log(result.data)
+               /*  setUser(result.data) */
             }else{
                 console.log(result.message)
             }
