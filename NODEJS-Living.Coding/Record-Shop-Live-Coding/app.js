@@ -23,7 +23,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/record-shop-live-database",()=>{
 //express middleware to parsing json data 
 app.use(express.json())
 //cors middleware
-app.use(cors())
+app.use(cors({origin: "http://localhost:3000", exposedHeaders:["token"]}))
 app.use(cookieParser())
 
 

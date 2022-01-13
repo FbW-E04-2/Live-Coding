@@ -5,6 +5,8 @@ function App({ Component, pageProps }) {
   
   return <div className="container">
     <Nav/>
+    <br />
+    <br />
     <Component {...pageProps} />
 
   </div>
