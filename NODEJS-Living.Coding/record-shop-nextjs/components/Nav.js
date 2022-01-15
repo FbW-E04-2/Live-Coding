@@ -4,7 +4,7 @@ import { useContext, useRef } from "react";
 import { MyContext } from "./context/Context";
 
 export default function nav() {
-  const {isRegister,user,setUser}= useContext(MyContext)
+  const {isRegister,user,setUser,cart}= useContext(MyContext)
   const router =useRouter()
 const ham= useRef()
   const logoutUser=()=>{
@@ -43,7 +43,7 @@ const ham= useRef()
             <a className="navbar-item">Records</a>
           </Link>
           <Link href="/cart" >
-            <a className="navbar-item">Cart</a>
+            <a className="navbar-item">Cart  <span style={{position:"relative", bottom:"10px"}}>{cart.length}</span></a>
           </Link>
           {user && <> <Link href="/orders">
             <a className="navbar-item">Orders</a>

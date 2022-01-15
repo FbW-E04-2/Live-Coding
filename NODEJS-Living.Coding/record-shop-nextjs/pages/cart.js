@@ -32,8 +32,8 @@ export default function Cart() {
         })
     }
     return (
-        <div>
-            <h2>Cart Items</h2>
+        <div className="container">
+            <h2 className="title has-text-centered">Cart Items</h2>
             {cart.map(record=>{
                 return(
                     <div key={record._id}>
@@ -43,7 +43,7 @@ export default function Cart() {
                     </div>
                 )
             })}
-            <button className="button" onClick={placeOrder}> checkout</button>
+            <button className="button is-primary" onClick={placeOrder}> checkout</button>
         </div>
     )
 }
