@@ -64,11 +64,12 @@ const addToCart=(item)=>{
 }
 
     return (
-        <div>
-            <h1>records page</h1>
+        <div className="container">
+             <h1 className="title has-text-centered">Records Page</h1>
+            <section className="columns has-text-centered is-centered is-multiline">
             {data && data.map(record=>{
                 return(
-                    <div key={record._id}> 
+                    <div key={record._id} className="column card my-1 mx-1 section is-one-quarter-desktop is-5-tablet is-12-mobile "> 
                         <h2>{record.title}</h2>
                         <h3>{record.artist}</h3>
                         <h3>$ {record.price}</h3>
@@ -76,6 +77,9 @@ const addToCart=(item)=>{
                     </div>
                 )
             })}
+            </section>
+           
+           
 
     
         </div>
