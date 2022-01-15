@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { MyContext } from "./context/Context";
 
 export default function nav() {
   const {isRegister,user,setUser}= useContext(MyContext)
   const router =useRouter()
-
+const ham= useRef()
   const logoutUser=()=>{
     setUser(null)
     localStorage.removeItem("token")
@@ -25,6 +25,7 @@ export default function nav() {
           aria-label="menu"
           aria-expanded="false"
           data-target="navbarBasicExample"
+          onClick={()=>ham.current.classList.toggle("is-active")}
         >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -32,7 +33,7 @@ export default function nav() {
         </a>
       </div>
 
-      <div id="navbarBasicExample" className="navbar-menu">
+      <div ref={ham} id="navbarBasicExample" className="navbar-menu">
         <div className="navbar-start">
           <Link href="/">
             <a className="navbar-item">Home</a>
