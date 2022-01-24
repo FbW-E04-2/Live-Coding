@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useState } from 'react'
 import styles from '../styles/Home.module.css'
-
+import Child from "../components/Child"
 export default function Home() {
   const [count,setCount] =useState(0)
   return (
@@ -17,6 +17,7 @@ export default function Home() {
       
         <h1>Counter: {count}</h1>
         <button onClick={()=>setCount(count+1)}>increment</button>
+        <Child name="Naqvi"/>
       </main>
 
     </div>
