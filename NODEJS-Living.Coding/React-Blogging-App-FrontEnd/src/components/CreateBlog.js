@@ -4,7 +4,7 @@ import { MyContext } from "../context/context";
 import {useNavigate} from "react-router-dom"
 
 export default function CreateBlog() {
-  const { user } = useContext(MyContext);
+  const { user ,setBlogs,blogs } = useContext(MyContext);
   const navigate =useNavigate()
 
   const addBlog = (e) => {
@@ -23,6 +23,7 @@ export default function CreateBlog() {
         if (result.success) {
           console.log(result);
           toast.success("Published Successfully !")
+          setBlogs([...blogs , result.data ])   
           setTimeout(()=>{
               navigate("/blogs")
           },1000)
