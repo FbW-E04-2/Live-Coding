@@ -39,7 +39,7 @@ const {user} =useContext(MyContext)
               <button onClick={()=>AddOnComment(com._id,com.blogid)}>&#x1F680;</button>
               
             </details> 
-            {com.replyComments && <CommentReply comments={com.replyComments}/>}
+            <CommentReply comments={com.replyComments}/>
             </li>
            )
         })}
