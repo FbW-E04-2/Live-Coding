@@ -2,17 +2,26 @@ const express = require("express")
 const app = express()
 const session = require("express-session")
 const jwt = require("jsonwebtoken")
-const MongoSessionStorage= require("connect-mongodb-session")(session)
-const mongoose = require("mongoose")
+/* const MongoSessionStorage= require("connect-mongodb-session")(session)
+const mongoose = require("mongoose") */
+const RedisStore= require("connect-redis")(session)
+const redis = require("redis")
 
+let redisClient = redis.createClient({
+    host:"127.0.0.1",
+    port:6297, legacyMode: true
+})
+redisClient.connect()
 
-mongoose.connect("mongodb://127.0.0.1:27017/express-session-storage-data")
+const store= new RedisStore({client:redisClient})
+
+/* mongoose.connect("mongodb://127.0.0.1:27017/express-session-storage-data")
 
 let store = new MongoSessionStorage({
     uri:"mongodb://127.0.0.1:27017/express-session-storage-data",
     collection:"session-data"
 })
-
+ */
 app.use(express.json())
 
  // mongoose
@@ -33,8 +42,7 @@ app.use(session({
 
 //counting how many times user visited that page 
 
-app.get("/",(req,res)=>{
-    console.log(req.session.cookie);
+app.get("/",async(req,res)=>{  
     if(req.session.count){
        req.session.count++; 
     }else{
