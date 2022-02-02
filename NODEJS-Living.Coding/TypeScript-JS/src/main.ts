@@ -42,8 +42,8 @@ let Status:boolean = true ;
  console.log(Status);
 
 // null and undefined
-let localdata:object= null;
-localdata={id:"123",name:"Hanry"}
+/* let localdata:object= null;
+localdata={id:"123",name:"Hanry"} */
 
 
 // any
