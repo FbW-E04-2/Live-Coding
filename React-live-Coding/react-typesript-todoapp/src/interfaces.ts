@@ -5,8 +5,3 @@ export interface TodoItemType {
     text:string,
     done:boolean
 }
-
-/* export interface TodoListType {
-    todoList: TodoItemType[]
-}
- */

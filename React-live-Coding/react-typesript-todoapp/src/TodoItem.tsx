@@ -2,18 +2,15 @@ import React from 'react';
 import {TodoItemType} from "./interfaces"
 type Props= {
     task:TodoItemType,
-    setTodoList:(list:TodoItemType[])=>void,
-    todoList:TodoItemType[]
+    deleteTask:(id:string)=>void,
+    updateTask:(id:string)=>void
 }
 
 
-export default function TodoItem({task,setTodoList,todoList} : Props) {
-    const deleteTodoItem=(item:TodoItemType)=>{
-        setTodoList(todoList.filter(task=>task.id!==item.id))
-    }
-    
+export default function TodoItem({task,deleteTask,updateTask} : Props) {
+   console.log("");
 
-  return <li>{task.text} <button onClick={()=>deleteTodoItem(task)}>X </button> <button>update</button></li>
+  return <li style={{backgroundColor:task.done?"green":"gray" }}>{task.text} <button onClick={()=>deleteTask(task.id)}>X </button> <button onClick={()=>updateTask(task.id)}>update</button></li>
 }
 
 
