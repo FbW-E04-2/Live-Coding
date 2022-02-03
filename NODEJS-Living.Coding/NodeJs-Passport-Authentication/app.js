@@ -1,13 +1,23 @@
 const express = require("express")
 const app = express()
+require("dotenv").config()
 const PORT = process.env.PORT || 4000;
 require("./passportConfig")
 const passport = require("passport")
-const mongoose= require("mongoose")
+const mongoose= require("mongoose");
+const UserSchema = require("./UserSchema");
 
 
 mongoose.connect("mongodb://127.0.0.1:27017/passport-users-database",()=>console.log("connected to db"))
 
+
+//initialize passport
+passport.initialize()
+//initial passport session
+passport.session()
+
+//setting view engine in app
+app.set("view engine", "ejs")
 
 app.get("/",(req,res)=>{
     res.sendFile(__dirname+"/index.html")
@@ -18,7 +28,15 @@ app.get("/auth/google",passport.authenticate("google",{scope:["profile"]}) )//op
 
 //redirect
 app.get("/auth/google/redirect", passport.authenticate("google"),(req,res)=>{
-    res.send("we reached to redirect url")
+    console.log(req.user);
+  /*   res.send({user:req.user}) */
+    res.redirect(`/profile/${req.user.id}`)
+})
+
+app.get("/profile/:id",async (req,res)=>{
+    const user = await UserSchema.findOne({id:req.params.id})
+
+    res.render("profile",{user:user})
 })
 
 app.listen(PORT, ()=>{console.log("server is running on port 4000");})
